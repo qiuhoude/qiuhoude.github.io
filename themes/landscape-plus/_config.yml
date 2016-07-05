@@ -1,0 +1,44 @@
+menu: # 站点顶部菜单,支持子菜单
+  Home: /
+  Archives: /archives # 归档
+  About: /about 
+  # GuestBook: /guestBook留言板
+rss: /atom.xml
+
+# Content
+# archive_date_format: MMM DD 
+excerpt_link: Read More #摘要链接文字
+fancybox: true #是否开启fancybox效果
+mathjax: false #是否开启latex数学公式
+# archive_yearly: false #按年存档
+
+# Sidebar 侧边栏
+sidebar: right #位置
+
+# 要加载的工具在这里添加
+widgets: 
+- category 
+- tag # 标签
+- tagcloud # 标签云
+- archive # 归档
+- recent_posts
+- links
+
+# Links 友情链接
+links:
+  Github: http://github.com/qiuhoude
+  oschina blog: http://qiuhoude.oschina.net/
+
+#评论设置
+duoshuo_shortname: houdepp #多说账号
+
+# Baidu share
+baidushare: true
+
+# other
+favicon: /favicon.ico #网站图标
+twitter:
+google_plus:
+fb_admins: 
+fb_app_id:
+google_analytics: #Google分析id
