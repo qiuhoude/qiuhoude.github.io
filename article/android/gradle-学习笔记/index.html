@@ -1,0 +1,835 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="gradle,android," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="gradle 学习笔记每次使用Android studio,gradle构建时输出一大堆看不懂得日志,所以专门学习gradle,此文是学习的笔记.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gradle 学习笔记">
+<meta property="og:url" content="http://qiuhoude.github.io/article/android/gradle-学习笔记/index.html">
+<meta property="og:site_name" content="胖胖厚德">
+<meta property="og:description" content="gradle 学习笔记每次使用Android studio,gradle构建时输出一大堆看不懂得日志,所以专门学习gradle,此文是学习的笔记.">
+<meta property="og:updated_time" content="2016-06-26T14:06:01.723Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gradle 学习笔记">
+<meta name="twitter:description" content="gradle 学习笔记每次使用Android studio,gradle构建时输出一大堆看不懂得日志,所以专门学习gradle,此文是学习的笔记.">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://qiuhoude.github.io/article/android/gradle-学习笔记/"/>
+
+  <title> gradle 学习笔记 | 胖胖厚德 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?88ff85b36a65e019fc98043c074d5b29";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">胖胖厚德</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">勿忘初心</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'LJ8x6yEk2NmCUa6TKDQ1','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                gradle 学习笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-26T21:58:11+08:00" content="2016-06-26">
+              2016-06-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/article/android/gradle-学习笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/android/gradle-学习笔记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="gradle-学习笔记"><a href="#gradle-学习笔记" class="headerlink" title="gradle 学习笔记"></a>gradle 学习笔记</h1><p>每次使用Android studio,gradle构建时输出一大堆看不懂得日志,所以专门学习gradle,此文是学习的笔记.<br><a id="more"></a></p>
+<h2 id="Groovy-简单语法学习"><a href="#Groovy-简单语法学习" class="headerlink" title="Groovy 简单语法学习"></a>Groovy 简单语法学习</h2><h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line">println <span class="string">"hello groovy"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> variable1 = <span class="number">1</span> <span class="comment">//可以不使用分号结尾</span></span><br><span class="line"><span class="keyword">def</span> <span class="keyword">double</span> money = <span class="number">30.25</span> <span class="comment">//定义有自定类型的变量</span></span><br><span class="line"></span><br><span class="line">println variable1 </span><br><span class="line">println money </span><br><span class="line"></span><br><span class="line"><span class="comment">//有返回值的函数</span></span><br><span class="line">String getString()&#123;</span><br><span class="line">   <span class="keyword">return</span> <span class="string">"I am a string"</span></span><br><span class="line">&#125;</span><br><span class="line">getString()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> nonReturnTypeFunc()&#123;</span><br><span class="line">    <span class="string">"getSomething return value"</span> <span class="comment">//如果这是最后一行代码，则返回类型为String</span></span><br><span class="line">    <span class="number">1000</span> <span class="comment">//如果这是最后一行代码，则返回类型为Integer</span></span><br><span class="line">&#125;</span><br><span class="line">nonReturnTypeFunc()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">String getString(weight)&#123;</span><br><span class="line">    <span class="comment">//双引号""的内容则和脚本语言的处理有点像，如果字符中有$号的话，则它会$表达式先求值</span></span><br><span class="line">    <span class="comment">//单引号,不对$符号进行转义</span></span><br><span class="line">   <span class="keyword">return</span> <span class="string">"I am a weight is $weight kg"</span></span><br><span class="line">&#125;</span><br><span class="line">getString(<span class="number">75</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//三个引号'''xxx'''中的字符串支持随意换行</span></span><br><span class="line"><span class="keyword">def</span> multieLines = <span class="string">''' </span><br><span class="line">哈哈哈</span><br><span class="line">嘻嘻嘻</span><br><span class="line">呜呜呜</span><br><span class="line">'''</span></span><br><span class="line"></span><br><span class="line">print(multieLines)</span><br><span class="line"></span><br><span class="line"><span class="comment">//基本数据类型 </span></span><br><span class="line"><span class="comment">//作为动态语言，Groovy世界中的所有事物都是对象。所以，int，boolean这些Java中的基本数据类型，</span></span><br><span class="line"><span class="comment">//在Groovy代码中其实对应的是它们的包装数据类型。比如int对应为Integer，boolean对应为Boolean</span></span><br><span class="line"><span class="keyword">def</span> <span class="keyword">double</span> num = <span class="number">1.00</span></span><br><span class="line"><span class="keyword">def</span> <span class="keyword">boolean</span> bool = <span class="literal">false</span></span><br><span class="line">println num.getClass()</span><br><span class="line">println bool.getClass()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//容器</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//List 链表，其底层对应Java中的List接口，一般用ArrayList作为真正的实现类。</span></span><br><span class="line"><span class="keyword">def</span> aList = [<span class="number">5</span>,<span class="string">'string'</span>,<span class="literal">true</span>,<span class="number">0.55</span>] <span class="comment">//List由[]定义，其元素可以是任何对象</span></span><br><span class="line">println aList[<span class="number">2</span>]</span><br><span class="line">println aList.size</span><br><span class="line"></span><br><span class="line"><span class="comment">//变量存取：可以直接通过索引存取，而且不用担心索引越界。</span></span><br><span class="line"><span class="comment">//如果索引超过当前链表长度，List会自动往该索引添加元素</span></span><br><span class="line">aList[<span class="number">100</span>] = <span class="number">100</span> </span><br><span class="line">println aList[<span class="number">100</span>]</span><br><span class="line">println aList.size <span class="comment">//结果是101</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//Map：键-值表，其底层对应Java中的LinkedHashMap。</span></span><br><span class="line"><span class="comment">//Map由[:]定义，注意其中的冒号。冒号左边是key，右边是Value。key必须是字符串，</span></span><br><span class="line"><span class="comment">//value可以是任何对象。另外，key可以用''或""包起来，也可以不用引号包起来</span></span><br><span class="line"><span class="keyword">def</span> aMap = [<span class="string">'key1'</span>:<span class="string">'value1'</span>,<span class="string">'key2'</span>:<span class="literal">true</span>] </span><br><span class="line"></span><br><span class="line">println aMap.key1</span><br><span class="line">println aMap[<span class="string">'key2'</span>] <span class="comment">//aMap[key2] 会报错 </span></span><br><span class="line">aMap.anotherkey = <span class="string">"i am map"</span><span class="comment">//为map添加新元素</span></span><br><span class="line">println aMap.size() <span class="comment">// 3个</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//Range：范围，它其实是List的一种拓展。</span></span><br><span class="line"><span class="comment">//Range类型的变量 由begin值+两个点+end值</span></span><br><span class="line"><span class="keyword">def</span> aRange = <span class="number">1.</span><span class="number">.5</span> <span class="comment">//表示左边这个aRange包含1,2,3,4,5这5个值</span></span><br><span class="line">println aRange.size() <span class="comment">//5</span></span><br><span class="line">println aRange.getFrom() <span class="comment">//1</span></span><br><span class="line">println aRange.getTo() <span class="comment">//5 方法看groovy api文档</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//闭包 Closure,很总要 gradle中很多地方用到了</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> aClosure = &#123; <span class="comment">//闭包是一段代码，所以需要用花括号括起来..</span></span><br><span class="line">    Stringparam1, <span class="keyword">int</span> arg -&gt; <span class="comment">//这个箭头很关键。箭头前面是参数定义，箭头后面是代码  </span></span><br><span class="line">    println <span class="string">"Stringparam1 is $Stringparam1, $arg"</span>  <span class="comment">//这是代码，最后一句是返回值,也可以使用return，和Groovy中普通函数一样  </span></span><br><span class="line">&#125;</span><br><span class="line">aClosure(<span class="string">"xx"</span>,<span class="number">2</span>)</span><br><span class="line">aClosure.call(<span class="string">"yy"</span>,<span class="number">100</span>) </span><br><span class="line"><span class="comment">//无参闭包 </span></span><br><span class="line"><span class="keyword">def</span> noArgumnetClouser = &#123;</span><br><span class="line">    <span class="comment">//如果闭包没定义参数的话，则隐含有一个参数，这个参数名字叫it，</span></span><br><span class="line">    <span class="comment">//和this的作用类似。it代表闭包的参数。</span></span><br><span class="line">    <span class="string">"我是一个无参闭包 $it"</span> <span class="comment">//直接是纯代码没有 -&gt;符号</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">def</span> resultClouser = noArgumnetClouser()</span><br><span class="line">print resultClouser</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> noParamClosure = &#123; -&gt; <span class="literal">true</span> &#125;</span><br><span class="line"><span class="comment">//noParamClosure ("test") //会报错</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//闭包在Groovy中大量使用</span></span><br><span class="line"><span class="comment">//比如 List的 each方法 public static &lt;T&gt; List&lt;T&gt; each(List&lt;T&gt; self, Closure closure)</span></span><br><span class="line"><span class="keyword">def</span> iamList = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]  <span class="comment">//定义一个List</span></span><br><span class="line">iamList.each&#123;  <span class="comment">//调用它的each,each是个函数，圆括号去哪了？</span></span><br><span class="line">      println it</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Groovy中，当函数的最后一个参数是闭包的话，可以省略圆括号</span></span><br><span class="line"><span class="keyword">def</span> testClosure(Closure closure)&#123;</span><br><span class="line">      <span class="comment">//do something</span></span><br><span class="line">      closure() <span class="comment">//调用闭包</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">testClosure&#123;</span><br><span class="line">   println <span class="string">"i am in closure "</span></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//对Map的findAll而言，Closure可以有两个参数。findAll会将Key和Value分别传进去。</span></span><br><span class="line"><span class="comment">//并且，Closure返回true，表示该元素是自己想要的。返回false表示该元素不是自己要找的</span></span><br><span class="line"><span class="keyword">def</span> aMap2 = [<span class="string">'name'</span>:<span class="string">'qiu'</span>,<span class="string">'age'</span>:<span class="number">23</span>,<span class="string">'isMan'</span>:<span class="literal">true</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> results = aMap2.findAll&#123;</span><br><span class="line">    key,value -&gt;</span><br><span class="line">    println <span class="string">"key=$key , value=$value"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="什么是groovy脚本"><a href="#什么是groovy脚本" class="headerlink" title="什么是groovy脚本"></a>什么是groovy脚本</h3><p>创建<code>test.groovy</code>文件,<br>写入<code>println &#39;Hello Groovy!&#39;</code>,<br>然后使用<code>groovyc -d classes test.groovy</code>进行编译成class文件<br>使用jd-gui反编译会发现test.class  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> groovy.lang.Binding;</span><br><span class="line"><span class="keyword">import</span> groovy.lang.Script;</span><br><span class="line"><span class="keyword">import</span> org.codehaus.groovy.runtime.InvokerHelper;</span><br><span class="line"><span class="keyword">import</span> org.codehaus.groovy.runtime.callsite.CallSite;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> <span class="keyword">extends</span> <span class="title">Script</span></span><br><span class="line"></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">test</span><span class="params">()</span></span><br><span class="line">  </span>&#123;</span><br><span class="line">    test <span class="keyword">this</span>;</span><br><span class="line">    CallSite[] arrayOfCallSite = $getCallSiteArray();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">test</span><span class="params">(Binding context)</span></span><br><span class="line">  </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(context);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span><br><span class="line">  </span>&#123;</span><br><span class="line">    CallSite[] arrayOfCallSite = $getCallSiteArray();</span><br><span class="line">    arrayOfCallSite[<span class="number">0</span>].call(InvokerHelper.class, test.class, args);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Object <span class="title">run</span><span class="params">()</span></span><br><span class="line">  </span>&#123;</span><br><span class="line">    CallSite[] arrayOfCallSite = $getCallSiteArray(); <span class="keyword">return</span> arrayOfCallSite[<span class="number">1</span>].callCurrent(<span class="keyword">this</span>, <span class="string">"Hello Groovy!"</span>); <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>test.groovy被转换成了一个test类，继承Script</li>
+<li>每一个脚本都会生成一个static main函数。这样，当我们groovy test.groovy的时候，其实就是用java去执行这个main函数</li>
+<li>脚本中的所有代码都会放到run函数中。比如，println ‘Hello Groovy!’，这句代码实际上是包含在run函数里的。</li>
+<li>如果脚本中定义了函数，则函数会被定义在test类中。</li>
+</ul>
+<h4 id="脚本中的变量和作用域"><a href="#脚本中的变量和作用域" class="headerlink" title="脚本中的变量和作用域"></a>脚本中的变量和作用域</h4><h3 id="groovy重要API"><a href="#groovy重要API" class="headerlink" title="groovy重要API"></a>groovy重要API</h3><h4 id="io操作api链接"><a href="#io操作api链接" class="headerlink" title="io操作api链接"></a>io操作api链接</h4><p><a href="http://docs.groovy-lang.org/latest/html/groovy-jdk/java/io/File.html" target="_blank" rel="external">File</a><br><a href="http://docs.groovy-lang.org/latest/html/groovy-jdk/java/io/InputStream.html" target="_blank" rel="external">InputStream</a><br><a href="http://docs.groovy-lang.org/latest/html/groovy-jdk/java/io/OutputStream.html" target="_blank" rel="external">OutputStream</a><br><a href="http://docs.groovy-lang.org/latest/html/groovy-jdk/java/io/Reader.html" target="_blank" rel="external">Reader</a><br><a href="http://docs.groovy-lang.org/latest/html/groovy-jdk/java/io/Writer.html" target="_blank" rel="external">Writer</a><br><a href="http://docs.groovy-lang.org/latest/html/groovy-jdk/java/nio/file/Path.html" target="_blank" rel="external">Path</a>  </p>
+<h4 id="读文件"><a href="#读文件" class="headerlink" title="读文件"></a>读文件</h4><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> targetFile = <span class="keyword">new</span> File(<span class="string">"/home/xx"</span>)</span><br><span class="line"><span class="comment">//读取每一行</span></span><br><span class="line">targetFile.eachLine&#123; <span class="comment">//eachLine参数是一个Closure</span></span><br><span class="line">  String oneLine -&gt;  </span><br><span class="line">   println oneLine      </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//文件内容一次性读出，返回类型为byte[]  </span></span><br><span class="line">targetFile.getBytes() </span><br><span class="line"></span><br><span class="line"><span class="comment">//获取流</span></span><br><span class="line"><span class="keyword">def</span> ism = targetFile.newInputStream()  </span><br><span class="line"><span class="comment">//操作ism，最后记得关掉  </span></span><br><span class="line">ism.close</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用闭包操作inputStream</span></span><br><span class="line"><span class="comment">//以后在Gradle里会常看到这种搞法</span></span><br><span class="line">targetFile.withInputStream&#123; </span><br><span class="line">    ism -&gt;  <span class="comment">//操作ism. 不用close。Groovy会自动替你close</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="写文件"><a href="#写文件" class="headerlink" title="写文件"></a>写文件</h4><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//copy文件</span></span><br><span class="line"><span class="keyword">def</span> srcFile = <span class="keyword">new</span> File(源文件名)  </span><br><span class="line"><span class="keyword">def</span> targetFile = <span class="keyword">new</span> File(目标文件名)  </span><br><span class="line">targetFile.withOutputStream&#123; os-&gt;  </span><br><span class="line">  srcFile.withInputStream&#123; ins-&gt;  </span><br><span class="line">      os &lt;&lt; ins   <span class="comment">//利用OutputStream的&lt;&lt;操作符重载，完成从inputstream到OutputStream  </span></span><br><span class="line">       <span class="comment">//的输出  </span></span><br><span class="line">   &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="xml操作"><a href="#xml操作" class="headerlink" title="xml操作"></a>xml操作</h4><p>test.xml  </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">response</span> <span class="attr">version-api</span>=<span class="string">"2.0"</span>&gt;</span>  </span><br><span class="line">       <span class="tag">&lt;<span class="name">value</span>&gt;</span>  </span><br><span class="line">           <span class="tag">&lt;<span class="name">books</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">book</span> <span class="attr">available</span>=<span class="string">"20"</span> <span class="attr">id</span>=<span class="string">"1"</span>&gt;</span>  </span><br><span class="line">                   <span class="tag">&lt;<span class="name">title</span>&gt;</span>Don Xijote<span class="tag">&lt;/<span class="name">title</span>&gt;</span>  </span><br><span class="line">                   <span class="tag">&lt;<span class="name">author</span> <span class="attr">id</span>=<span class="string">"1"</span>&gt;</span>Manuel De Cervantes<span class="tag">&lt;/<span class="name">author</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;/<span class="name">book</span>&gt;</span>  </span><br><span class="line">               <span class="tag">&lt;<span class="name">book</span> <span class="attr">available</span>=<span class="string">"14"</span> <span class="attr">id</span>=<span class="string">"2"</span>&gt;</span>  </span><br><span class="line">                   <span class="tag">&lt;<span class="name">title</span>&gt;</span>Catcher in the Rye<span class="tag">&lt;/<span class="name">title</span>&gt;</span>  </span><br><span class="line">                  <span class="tag">&lt;<span class="name">author</span> <span class="attr">id</span>=<span class="string">"2"</span>&gt;</span>JD Salinger<span class="tag">&lt;/<span class="name">author</span>&gt;</span>  </span><br><span class="line">              <span class="tag">&lt;/<span class="name">book</span>&gt;</span>  </span><br><span class="line">              <span class="tag">&lt;<span class="name">book</span> <span class="attr">available</span>=<span class="string">"13"</span> <span class="attr">id</span>=<span class="string">"3"</span>&gt;</span>  </span><br><span class="line">                  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Alice in Wonderland<span class="tag">&lt;/<span class="name">title</span>&gt;</span>  </span><br><span class="line">                  <span class="tag">&lt;<span class="name">author</span> <span class="attr">id</span>=<span class="string">"3"</span>&gt;</span>Lewis Carroll<span class="tag">&lt;/<span class="name">author</span>&gt;</span>  </span><br><span class="line">              <span class="tag">&lt;/<span class="name">book</span>&gt;</span>  </span><br><span class="line">              <span class="tag">&lt;<span class="name">book</span> <span class="attr">available</span>=<span class="string">"5"</span> <span class="attr">id</span>=<span class="string">"4"</span>&gt;</span>  </span><br><span class="line">                  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Don Xijote<span class="tag">&lt;/<span class="name">title</span>&gt;</span>  </span><br><span class="line">                  <span class="tag">&lt;<span class="name">author</span> <span class="attr">id</span>=<span class="string">"4"</span>&gt;</span>Manuel De Cervantes<span class="tag">&lt;/<span class="name">author</span>&gt;</span>  </span><br><span class="line">              <span class="tag">&lt;/<span class="name">book</span>&gt;</span>  </span><br><span class="line">           <span class="tag">&lt;/<span class="name">books</span>&gt;</span>  </span><br><span class="line">      <span class="tag">&lt;/<span class="name">value</span>&gt;</span>  </span><br><span class="line">   <span class="tag">&lt;/<span class="name">response</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>GPath伪代码    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import groovy.util.XmlSlurper  //解析XML时候要引入这个groovy的package  </span><br><span class="line">//第一步，创建XmlSlurper类  </span><br><span class="line">def xparser = new XmlSlurper()  </span><br><span class="line">def targetFile = new File(&quot;test.xml&quot;)  </span><br><span class="line">//轰轰的GPath出场  </span><br><span class="line">GPathResult gpathResult =xparser.parse(targetFile)  </span><br><span class="line">   </span><br><span class="line">//开始玩test.xml。现在我要访问id=4的book元素。  </span><br><span class="line">//下面这种搞法，gpathResult代表根元素response。通过e1.e2.e3这种  </span><br><span class="line">//格式就能访问到各级子元素....  </span><br><span class="line">def book4 = gpathResult.value.books.book[3]  </span><br><span class="line">//得到book4的author元素  </span><br><span class="line">def author = book4.author  </span><br><span class="line">//再来获取元素的属性和textvalue  </span><br><span class="line">assert author.text() == &apos; Manuel De Cervantes &apos;  </span><br><span class="line">获取属性更直观  </span><br><span class="line">author.@id == &apos;4&apos; 或者 author[&apos;@id&apos;] == &apos;4&apos;  </span><br><span class="line">属性一般是字符串，可通过toInteger转换成整数  </span><br><span class="line">author.@id.toInteger() == 4  </span><br><span class="line">好了。GPath就说到这。再看个例子。我在使用Gradle的时候有个需求，就是获取AndroidManifest.xml版本号（versionName）。有了GPath，一行代码搞定，请看：  </span><br><span class="line">def androidManifest = newXmlSlurper().parse(&quot;AndroidManifest.xml&quot;)  </span><br><span class="line">println androidManifest[&apos;@android:versionName&apos;]  </span><br><span class="line">或者  </span><br><span class="line">println androidManifest.@&apos;android:versionName&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="Groovy的Bean和闭包的delegate机制"><a href="#Groovy的Bean和闭包的delegate机制" class="headerlink" title="Groovy的Bean和闭包的delegate机制"></a>Groovy的Bean和闭包的delegate机制</h3><h4 id="Bean的概念"><a href="#Bean的概念" class="headerlink" title="Bean的概念"></a>Bean的概念</h4><p>Groovy中的Bean和Java中的Bean有一个很大的不同，即Groovy为每一个字段都会自动生成getter和setter，并且我们可以通过像访问字段本身一样调用getter和setter</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class User &#123;</span><br><span class="line">   private String name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">def bean = new User()</span><br><span class="line">bean.name = &apos;this is name&apos; </span><br><span class="line">println bean.name</span><br></pre></td></tr></table></figure>
+<p>User只定义了一个私有的name属性，并没有getter和setter。但是在使用时，我们可以直接对name进行访问，无论时读还是写。事实上，我们并不是在直接访问name属性,当我们执行”bean.name = ‘this is name’”时，我们实际调用的是”bean.setName(‘this is name’)”，而在调用”println bean.name”时，我们实际调用的是”println bean.getName()”。这里的原因在于，Groovy动态地为name创建了getter和setter，采用像直接访问的方式的目的是为了增加代码的可读性，使它更加自然，而在内部，Groovy依然是在调用setter和getter方法</p>
+<h4 id="闭包的delegate机制"><a href="#闭包的delegate机制" class="headerlink" title="闭包的delegate机制"></a>闭包的delegate机制</h4><p>请参考<a href="http://www.cnblogs.com/davenkin/p/gradle-learning-3.html" target="_blank" rel="external">这篇</a>文章,本人没看懂…</p>
+<h2 id="gradle-部分"><a href="#gradle-部分" class="headerlink" title="gradle 部分"></a>gradle 部分</h2><p><a href="http://gradle.org/" target="_blank" rel="external">gradle官网</a><br><a href="https://docs.gradle.org/current/release-notes" target="_blank" rel="external">gradle官方文档</a><br><a href="https://docs.gradle.org/current/dsl/" target="_blank" rel="external">很重要的gradle文档</a><br><strong>User Guide</strong>是介绍Gradle的一本书<br><strong>DSL Reference</strong>是Gradle API的说明  </p>
+<p><strong>Gradle中，每一个待编译的工程都叫一个Project。每一个Project在构建的时候都包含一系列的Task。</strong>比如一个Android APK的编译可能包含：Java源码编译Task、资源编译Task、JNI编译Task、lint检查Task、打包生成APK的Task、签名Task等。  </p>
+<p>一个Project到底包含多少个Task，其实是由编译脚本指定的插件决定。插件是什么呢？插件就是用来定义Task，并具体执行这些Task的东西。  </p>
+<p>Gradle是一个框架，作为框架，它负责定义流程和规则。而具体的编译工作则是通过插件的方式来完成的。比如编译Java有Java插件，编译Groovy有Groovy插件，编译Android APP有Android APP插件，编译Android Library有Android Library插件  </p>
+<h3 id="多工程项目-Multi-Projects-build"><a href="#多工程项目-Multi-Projects-build" class="headerlink" title="多工程项目 Multi-Projects build"></a>多工程项目 Multi-Projects build</h3><ul>
+<li>在项目根目录下创建一个settings.gradle的文件,include所有工程 </li>
+<li>每一个Library和每一个App都是单独的Project.</li>
+<li>每一个Project在其根目录下都需要有一个build.gradle。build.gradle文件就是该Project的编译脚本，类似于Makefile。 </li>
+<li>一个Project是由若干tasks来组成的，当gradle xxx的时候，实际上是要求gradle执行xxx任务。这个任务就能完成具体的工作。</li>
+</ul>
+<p>settings.build模板</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span> <span class="string">':app'</span>, <span class="string">':myLib'</span>, <span class="string">':aaLib'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//如果lib工程放到一个ThirdPart文件夹下,可以配置</span></span><br><span class="line"><span class="keyword">project</span>(<span class="string">':myLib'</span>).projectDir = <span class="keyword">new</span> <span class="keyword">File</span>(<span class="string">'ThirdPart/myLib'</span>)</span><br><span class="line"><span class="keyword">project</span>(<span class="string">':aaLib'</span>).projectDir =<span class="keyword">new</span> <span class="keyword">File</span>(<span class="string">'ThirdPart/aaLib'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="gradle工作流程"><a href="#gradle工作流程" class="headerlink" title="gradle工作流程"></a>gradle工作流程</h3><p>Gradle工作包含三个阶段,每个阶段之后可以添加自定义Hook(钩子)代码</p>
+<ol>
+<li>Initiliazation phase 初始化阶段<ul>
+<li>对于multi-project build而言,就是执行<code>settings.gradle</code></li>
+</ul>
+</li>
+<li>Configration phase 设置阶段<ul>
+<li>目标是解析每个project中的<code>build.gradle</code>.比如multi-project build例子中，解析每个子目录中的build.gradle</li>
+<li>Configuration阶段完了后，整个build的project以及内部的Task关系就确定了.一个Project包含很多Task，每个Task之间有依赖关系,Configuration会建立一个有向图来描述Task之间的依赖关系</li>
+<li>可以在Task关系图建立好后，执行一些操作(添加一个HOOK)。       </li>
+</ul>
+</li>
+<li>Execution phase 执行阶段<ul>
+<li>执行完成,也可以加上hook</li>
+</ul>
+</li>
+</ol>
+<h3 id="gradle-主要api"><a href="#gradle-主要api" class="headerlink" title="gradle 主要api"></a>gradle 主要api</h3><p>Gradle基于Groovy，Groovy又基于Java。所以，Gradle执行的时候和Groovy一样，会把脚本转换成Java对象。Gradle主要有三种对象，这三种对象和三种不同的脚本文件对应，在gradle执行的时候，会将脚本转换成对应的对端：</p>
+<ul>
+<li>Gradle对象:当我们执行gradle xxx或者什么的时候，gradle会从默认的配置脚本中构造出一个Gradle对象。在整个执行过程中，只有这么一个对象。Gradle对象的数据类型就是Gradle。我们一般很少去定制这个默认的配置脚本。</li>
+<li>Project对象: 每一个build.gradle会转换成一个Project对象</li>
+<li>Settings对象:每一个settings.gradle都会转换成一个Settings对象</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Type of script</th>
+<th>Delegates to instance of</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Build script</td>
+<td>Project</td>
+</tr>
+<tr>
+<td>Init script</td>
+<td>Gradle</td>
+</tr>
+<tr>
+<td>Settings script</td>
+<td>Settings</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://docs.gradle.org/current/dsl/" target="_blank" rel="external">https://docs.gradle.org/current/dsl/</a>此文档中都有对应的说明  </p>
+<h3 id="gradle-task"><a href="#gradle-task" class="headerlink" title="gradle task"></a>gradle task</h3><p><a href="https://docs.gradle.org/current/dsl/org.gradle.api.Task.html" target="_blank" rel="external">官方文档位置</a> </p>
+<p>在我们创建Android工程的时候,在project级别的build.gradle会出现下面的任务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//任务,在other下可以看到,使用 gradle tasks --all进行查看</span><br><span class="line">task clean(type: Delete) &#123; //Property为</span><br><span class="line">    delete rootProject.buildDir </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">task myTask</span><br><span class="line">task myTask &#123; configure closure &#125;</span><br><span class="line">task myType &lt;&lt; &#123; task action &#125; //&lt;&lt; doLast的缩写</span><br><span class="line">task myTask(type: SomeType)</span><br><span class="line">task myTask(type: SomeType) &#123; configure closure &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>task关键字,就是一个groovy中的方法,大括号传里面其实是一个Closure(闭包).</li>
+<li>一般都是project的task()方法创建,并且所有的Task都存放在Project的TaskContainer中  </li>
+<li>一个Task包含若干Action。所以，Task有doFirst和doLast两个函数，用于添加需要最先执行的Action和需要和需要最后执行的Action。Action就是一个闭包。</li>
+<li>task创建的时候可以指定Type，通过type:名字表达,其实就是告诉Gradle，这个新建的Task对象会从哪个基类Task派生, 比如，Gradle本身提供了一些通用的Task,Copy、Delete等,比如上面就Delete任务</li>
+<li>当我们使用 task myTask{ xxx}的时候。花括号是一个closure。这会导致gradle在创建这个Task之后，返回给用户之前，会先执行closure的内容</li>
+<li>当我们使用task myTask &lt;&lt; {xxx}的时候，我们创建了一个Task对象，同时把closure做为一个action加到这个Task的action队列中，并且告诉它“最后才执行这个closure”。</li>
+</ul>
+<p><strong>doFirst 和Delete doLast</strong> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">task myTask &lt;&lt; &#123; </span><br><span class="line">   println &quot;doLast test!&quot;</span><br><span class="line">&#125;</span><br><span class="line">//等效于上面</span><br><span class="line">task myTask2()&#123;</span><br><span class="line">    doLast&#123;</span><br><span class="line">        println &quot;doLast test!&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>‘&lt;&lt;’ 表示 Task.doLast(Closure)  </p>
+<p><strong>dependsOn依赖关系</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">task taskB() &lt;&lt; &#123;</span><br><span class="line">    println &apos;taskB run&apos;</span><br><span class="line">&#125;</span><br><span class="line">task taskA(dependsOn:taskB) &lt;&lt; &#123;</span><br><span class="line">    println &apos;taskA run&apos;</span><br><span class="line">&#125;</span><br><span class="line">//也可以定义完了</span><br><span class="line">taskA.dependsOn taskB</span><br></pre></td></tr></table></figure>
+<p>执行任务A时会依赖任务B,会先执行任务B  </p>
+<p><strong>通过TaskContainer的create()方法创建Task</strong><br>每一个project都可以使用TaskContainer来创建task</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tasks.create(name: &apos;taskC&apos;) &lt;&lt; &#123;</span><br><span class="line">   println &apos;taskC run&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="android多渠道打包"><a href="#android多渠道打包" class="headerlink" title="android多渠道打包"></a>android多渠道打包</h4><p><a href="https://github.com/qiuhoude/MultiPackSample" target="_blank" rel="external">多渠道打包配置的例子</a>  </p>
+<p>参考:<br><a href="http://www.infoq.com/cn/articles/android-in-depth-gradle" target="_blank" rel="external">infoQ 深入理解gradle</a><br><a href="https://github.com/WuXiaolong/Gradle4Android" target="_blank" rel="external">吴小龙同学</a><br><a href="http://ask.android-studio.org/?/article/37" target="_blank" rel="external">http://ask.android-studio.org/?/article/37</a><br><a href="https://developer.android.com/studio/build/index.html" target="_blank" rel="external">google官方studio文档</a><br><a href="http://www.cnblogs.com/davenkin/p/gradle-learning-1.html" target="_blank" rel="external">gradle Task详解</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/gradle/" rel="tag">#gradle</a>
+          
+            <a href="/tags/android/" rel="tag">#android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/article/git/学习笔记/" rel="next" title="git 学习笔记">
+                <i class="fa fa-chevron-left"></i> git 学习笔记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/article/Linux/curl笔记/" rel="prev" title="curl笔记">
+                curl笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="article/android/gradle-学习笔记/"
+           data-title="gradle 学习笔记" data-url="http://qiuhoude.github.io/article/android/gradle-学习笔记/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="HoudeQiu" />
+          <p class="site-author-name" itemprop="name">HoudeQiu</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qiuhoude" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ruanyifeng.com/" title="阮一峰老师" target="_blank">阮一峰老师</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#gradle-学习笔记"><span class="nav-number">1.</span> <span class="nav-text">gradle 学习笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Groovy-简单语法学习"><span class="nav-number">1.1.</span> <span class="nav-text">Groovy 简单语法学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本语法"><span class="nav-number">1.1.1.</span> <span class="nav-text">基本语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是groovy脚本"><span class="nav-number">1.1.2.</span> <span class="nav-text">什么是groovy脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#脚本中的变量和作用域"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">脚本中的变量和作用域</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#groovy重要API"><span class="nav-number">1.1.3.</span> <span class="nav-text">groovy重要API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#io操作api链接"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">io操作api链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读文件"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">读文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写文件"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">写文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xml操作"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">xml操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Groovy的Bean和闭包的delegate机制"><span class="nav-number">1.1.4.</span> <span class="nav-text">Groovy的Bean和闭包的delegate机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Bean的概念"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">Bean的概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#闭包的delegate机制"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">闭包的delegate机制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gradle-部分"><span class="nav-number">1.2.</span> <span class="nav-text">gradle 部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多工程项目-Multi-Projects-build"><span class="nav-number">1.2.1.</span> <span class="nav-text">多工程项目 Multi-Projects build</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gradle工作流程"><span class="nav-number">1.2.2.</span> <span class="nav-text">gradle工作流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gradle-主要api"><span class="nav-number">1.2.3.</span> <span class="nav-text">gradle 主要api</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gradle-task"><span class="nav-number">1.2.4.</span> <span class="nav-text">gradle task</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#android多渠道打包"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">android多渠道打包</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HoudeQiu</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"houdepp"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
