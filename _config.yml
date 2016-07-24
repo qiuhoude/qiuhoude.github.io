@@ -2,8 +2,8 @@
 title: 胖胖厚德 #网站标题
 subtitle: 勿忘初心 #网站副标题 
 description:  #给搜索引擎看的，对站点的描述，可以自定义
-author: qiuhoude #在站点左下角可以看到
-language: zh-CN
+author: HoudeQiu #在站点左下角可以看到
+language: zh-Hans #zh-CN
 timezone: Asia/Shanghai 
 
 # URL 网址
@@ -69,7 +69,30 @@ pagination_dir: page #分页目录
 # Extensions 这里配置站点所用主题和插件  
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape-plus #当前主题名称。值为false时禁用主题
+theme: next #landscape-plus #当前主题名称。值为false时禁用主题
+
+# 百度统计
+baidu_analytics: 88ff85b36a65e019fc98043c074d5b29
+
+# Swiftype 搜索 用户名 houdeqiu 密码 85876862
+swiftype_key: LJ8x6yEk2NmCUa6TKDQ1
+
+# 站点建立时间 
+since: 2016
+
+# 百度分享
+baidushare: true
+
+index_generator:
+  per_page: 5
+
+archive_generator:
+  per_page: 20
+  yearly: true
+  monthly: true
+
+tag_generator:
+  per_page: 10
 
 # Deployment 
 ## Docs: https://hexo.io/docs/deployment.html
