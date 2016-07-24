@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="cURL," />
 
 
 
@@ -102,16 +102,16 @@
 
 
 
-<meta name="description">
+<meta name="description" content="cURL 学习笔记Command Line URL viewer == curlcurl不仅仅只是一个编程用的函数库,是一种命令行工具，作用是发出网络请求，然后得到和提取数据，显示在”标准输出”（stdout）上面.它支持多种协议正好和最近在学习的node.js 配合调试来使用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="curl笔记">
 <meta property="og:url" content="http://qiuhoude.github.io/article/Linux/curl笔记/index.html">
 <meta property="og:site_name" content="胖胖厚德">
-<meta property="og:description">
-<meta property="og:updated_time" content="2016-07-24T04:17:31.720Z">
+<meta property="og:description" content="cURL 学习笔记Command Line URL viewer == curlcurl不仅仅只是一个编程用的函数库,是一种命令行工具，作用是发出网络请求，然后得到和提取数据，显示在”标准输出”（stdout）上面.它支持多种协议正好和最近在学习的node.js 配合调试来使用">
+<meta property="og:updated_time" content="2016-07-24T03:33:06.152Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="curl笔记">
-<meta name="twitter:description">
+<meta name="twitter:description" content="cURL 学习笔记Command Line URL viewer == curlcurl不仅仅只是一个编程用的函数库,是一种命令行工具，作用是发出网络请求，然后得到和提取数据，显示在”标准输出”（stdout）上面.它支持多种协议正好和最近在学习的node.js 配合调试来使用">
 
 
 
@@ -380,7 +380,21 @@
       
 
       
-        
+        <h1 id="cURL-学习笔记"><a href="#cURL-学习笔记" class="headerlink" title="cURL 学习笔记"></a>cURL 学习笔记</h1><p>Command Line URL viewer == curl<br>curl不仅仅只是一个编程用的函数库,是一种命令行工具，作用是发出网络请求，然后得到和提取数据，显示在”标准输出”（stdout）上面.它支持多种协议<br>正好和最近在学习的node.js 配合调试来使用</p>
+<a id="more"></a>
+<h1 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 直接访问</span></span><br><span class="line">curl www.sina.com</span><br><span class="line"><span class="comment"># `-i`参数可以显示http response的头信息，连同网页代码一起。</span></span><br><span class="line">curl -i www.sina.com</span><br><span class="line"><span class="comment"># `-v`参数可以显示一次http通信的整个过程，包括端口连接和http request头信息。</span></span><br><span class="line">curl -v www.sina.com</span><br><span class="line"><span class="comment"># 查看更详细的通信过程</span></span><br><span class="line">curl --trace output.txt www.sina.com</span><br><span class="line"><span class="comment"># 查看更详细的通信过程,保存到output.txt文件</span></span><br><span class="line">curl --trace-ascii output.txt www.sina.com</span><br></pre></td></tr></table></figure>
+<h1 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用`-X`参数可以支持其他动词 ,尝试 --data可以简写 -d</span></span><br><span class="line">curl -i -X POST --data <span class="string">"data=xxx"</span> example.com/form.cgi</span><br><span class="line">curl -X DELETE www.example.com</span><br></pre></td></tr></table></figure>
+<h2 id="POST发送JSON"><a href="#POST发送JSON" class="headerlink" title="POST发送JSON"></a>POST发送JSON</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -i -H <span class="string">"Content-Type: application/json"</span> -X POST <span class="_">-d</span> <span class="string">'&#123;"username":"xyz","password":"xyz"&#125;'</span> http://localhost:3000/api/login</span><br></pre></td></tr></table></figure>
+<h1 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h1><p>就是模拟表单上传,比如以下表单<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"POST"</span> <span class="attr">enctype</span>=<span class="string">'multipart/form-data'</span> <span class="attr">action</span>=<span class="string">"upload.cgi"</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">file</span> <span class="attr">name</span>=<span class="string">upload</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">submit</span> <span class="attr">name</span>=<span class="string">press</span> <span class="attr">value</span>=<span class="string">"OK"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>可以使用下面命令<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --form upload=@localfilename --form press=OK [URL]</span><br></pre></td></tr></table></figure></p>
+<h1 id="下载文件"><a href="#下载文件" class="headerlink" title="下载文件"></a>下载文件</h1><p>加上-o 或 -O ，小-o指定本地路径，大-O就是远程的文件名称<br>http协议和ftp协议用法基本是一样，只不过 ftp需要用户名和密码<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载在当前目录下,文件名称是: eclipse-inst-win64.exe  </span></span><br><span class="line">$ curl -O http://ftp.jaist.ac.jp/pub/eclipse/oomph/epp/neon/R/eclipse-inst-win64.exe  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定本地路径</span></span><br><span class="line">$ curl -o  ~/download/ http://ftp.jaist.ac.jp/pub/eclipse/oomph/epp/neon/R/eclipse-inst-win64.exe </span><br><span class="line"></span><br><span class="line"><span class="comment"># ftp列出目录</span></span><br><span class="line">$ curl  ftp://ftp.sjtu.edu.cn -u name:passwd </span><br><span class="line"></span><br><span class="line"><span class="comment"># ftp下载</span></span><br><span class="line">$ curl -o ~/download/xx.zip ftp://ftp.sjtu.edu.cn/xx -u name:passwd </span><br><span class="line"></span><br><span class="line"><span class="comment"># 另外curl不支持递归下载，不过可以用数组方式下载文件，比如我们要下载1-10.gif连续命名的文件</span></span><br><span class="line">curl –u name:passwd ftp://www.xxx.com/img/[1-10].gif –O</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 要连续下载多个文件</span></span><br><span class="line">curl –u name:passwd ftp://www.xxx.com/img/[one,two,three].jpg</span><br></pre></td></tr></table></figure></p>
+<h1 id="其他参数"><a href="#其他参数" class="headerlink" title="其他参数"></a>其他参数</h1><h2 id="Referer字段"><a href="#Referer字段" class="headerlink" title="Referer字段"></a>Referer字段</h2><p>有时你需要在http request头信息中，提供一个referer字段，表示你是从哪里跳转过来的。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --referer http://www.example.com http://www.example.com</span><br></pre></td></tr></table></figure></p>
+<h2 id="User-Agent字段"><a href="#User-Agent字段" class="headerlink" title="User Agent字段"></a>User Agent字段</h2><p>这个字段是用来表示客户端的设备信息。服务器有时会根据这个字段，针对不同设备，返回不同格式的网页，比如手机版和桌面版。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8A293 Safari/6531.22.7</span></span><br><span class="line">curl --user-agent <span class="string">"[User Agent]"</span> [URL]</span><br></pre></td></tr></table></figure></p>
+<h2 id="set-cookie"><a href="#set-cookie" class="headerlink" title="set cookie"></a>set cookie</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curl --cookie <span class="string">"name=xxx"</span> www.example.com</span><br><span class="line"><span class="comment"># -c cookie-file`可以保存服务器返回的cookie到文件</span></span><br><span class="line">curl -c cookies http://example.com</span><br><span class="line"><span class="comment"># `-b cookie-file`可以使用这个文件作为cookie信息，进行后续的请求</span></span><br><span class="line">curl -b cookies http://example.com</span><br></pre></td></tr></table></figure>
+<h2 id="set-header"><a href="#set-header" class="headerlink" title="set header"></a>set header</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --header <span class="string">"Content-Type:application/json"</span> http://example.com</span><br></pre></td></tr></table></figure>
+<h2 id="HTTP认证"><a href="#HTTP认证" class="headerlink" title="HTTP认证"></a>HTTP认证</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --user name:password example.com</span><br></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://curl.haxx.se/docs/httpscripting.html" target="_blank" rel="external">Using cURl to automate HTTP jobs</a><br><a href="http://www.ruanyifeng.com/blog/2011/09/curl.html" target="_blank" rel="external">阮一峰老师curl</a></p>
+
       
     </div>
 
@@ -399,6 +413,12 @@
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cURL/" rel="tag">#cURL</a>
+          
+        </div>
       
 
       
@@ -506,7 +526,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -560,7 +580,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#cURL-学习笔记"><span class="nav-number">1.</span> <span class="nav-text">cURL 学习笔记</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GET请求"><span class="nav-number">2.</span> <span class="nav-text">GET请求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#POST请求"><span class="nav-number">3.</span> <span class="nav-text">POST请求</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#POST发送JSON"><span class="nav-number">3.1.</span> <span class="nav-text">POST发送JSON</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件上传"><span class="nav-number">4.</span> <span class="nav-text">文件上传</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下载文件"><span class="nav-number">5.</span> <span class="nav-text">下载文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他参数"><span class="nav-number">6.</span> <span class="nav-text">其他参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Referer字段"><span class="nav-number">6.1.</span> <span class="nav-text">Referer字段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#User-Agent字段"><span class="nav-number">6.2.</span> <span class="nav-text">User Agent字段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set-cookie"><span class="nav-number">6.3.</span> <span class="nav-text">set cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set-header"><span class="nav-number">6.4.</span> <span class="nav-text">set header</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP认证"><span class="nav-number">6.5.</span> <span class="nav-text">HTTP认证</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
           </div>
         </section>
